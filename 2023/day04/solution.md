@@ -110,10 +110,31 @@ Command-line argument 2: World
 
 **File:** `compare_numbers.sh`
 
-This script shows how to use `if/elif/else` to make decisions. It accepts two numbers as command-line arguments and compares them.
+This script shows how to use `if/elif/else` to make decisions. It accepts two numbers as command-line arguments and compares them. It also validates the inputs before doing the comparison, so the user gets a clear error message instead of a cryptic shell error.
 
 ```bash
 #!/bin/bash
+
+# compare_numbers.sh - Compares two numbers passed as command-line arguments
+#
+# Usage: ./compare_numbers.sh <num1> <num2>
+
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <num1> <num2>"
+    echo "Example: $0 10 5"
+    exit 1
+fi
+
+# Validate that both arguments are integers
+if ! [[ "$1" =~ ^-?[0-9]+$ ]]; then
+    echo "Error: '$1' is not a valid integer"
+    exit 1
+fi
+
+if ! [[ "$2" =~ ^-?[0-9]+$ ]]; then
+    echo "Error: '$2' is not a valid integer"
+    exit 1
+fi
 
 # Accept two numbers as command-line arguments
 num1=$1
@@ -142,9 +163,19 @@ bash compare_numbers.sh 4 4
 4 is equal to 4
 ```
 
+**Example with invalid arguments:**
+```
+bash compare_numbers.sh
+# Usage: compare_numbers.sh <num1> <num2>
+
+bash compare_numbers.sh abc 5
+# Error: 'abc' is not a valid integer
+```
+
 **Key concepts:**
 - `-gt` means **greater than**
 - `-lt` means **less than**
 - For equality, the `else` branch catches the remaining case (both are equal)
 - `fi` closes an `if` block in Bash (it's `if` spelled backwards)
 - Always quote variables (`"$num1"`) inside `[ ]` to handle edge cases safely
+- `[[ "$1" =~ ^-?[0-9]+$ ]]` uses a regex match to confirm the argument is a valid integer (including optional leading `-` for negatives)

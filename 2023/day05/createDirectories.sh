@@ -20,6 +20,11 @@ dir_name=$1
 start_num=$2
 end_num=$3
 
+if [ "$start_num" -gt "$end_num" ]; then
+    echo "Error: start_num ($start_num) must be less than or equal to end_num ($end_num)"
+    exit 1
+fi
+
 for (( i=start_num; i<=end_num; i++ )); do
     mkdir -p "${dir_name}${i}"
 done

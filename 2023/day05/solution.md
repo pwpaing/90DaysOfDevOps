@@ -95,7 +95,7 @@ Data loss can happen at any time - accidental deletion, disk failure, a bad depl
 # backup.sh - Creates a timestamped backup of the 2023/ directory
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-SOURCE_DIR="$(cd "${SCRIPT_DIR}/../" && pwd)/2023"
+SOURCE_DIR="$(cd "${SCRIPT_DIR}/../../" && pwd)/2023"
 
 # Backup destination is at the repository root level (outside 2023/) to
 # prevent self-inclusion: if backups landed inside 2023/, every subsequent
@@ -117,7 +117,7 @@ echo "Backup saved to: ${BACKUP_FILE}"
 | Part | What It Does |
 |---|---|
 | `SCRIPT_DIR` | Finds the directory the script lives in, so paths work from any location |
-| `SOURCE_DIR` | Points to the `2023/` folder one level above the script |
+| `SOURCE_DIR` | Points to the `2023/` folder two levels above the script |
 | `BACKUP_DIR` | A `backups/` folder two levels above the script, at the repo root — outside `2023/` so archives are never included in a later backup of the same source tree |
 | `mkdir -p` | Creates `backups/` if it does not exist yet (no error if it already exists) |
 | `date +%Y%m%d_%H%M%S` | Produces a timestamp like `20240115_143022` - year, month, day, hour, minute, second |

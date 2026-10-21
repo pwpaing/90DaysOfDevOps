@@ -14,7 +14,7 @@
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # The source directory to back up (the 2023/ folder at the repo root)
-SOURCE_DIR="$(cd "${SCRIPT_DIR}/../" && pwd)/2023"
+SOURCE_DIR="$(cd "${SCRIPT_DIR}/../../" && pwd)/2023"
 
 # Destination: a backups/ folder at the repository root level, outside 2023/
 # This avoids self-inclusion where prior archives would be bundled into
